@@ -12,6 +12,7 @@
 
 html{
     font-size: 62.5%;
+    background-color: transparent;
 }
 
 body{
@@ -102,12 +103,19 @@ section{
     padding: 5rem 9% 5rem;
 }
 
+section .home{
+    font-size: 4rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
 .home{
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8rem;
-    background-color: #1e1e1e;
+    gap: 10rem;
+    background-color: transparent;
 }
 
 .home .home-content h1{
@@ -131,7 +139,7 @@ span{
 }
 
 .hero-image{
-    border-radius: 50%;
+    border-radius: 70%;
 }
 
 .hero-image img{
@@ -213,14 +221,14 @@ span{
 
 .typing-text span::after{
     content: "";
-    background-color: black;
+    background-color: transparent;
     position: absolute;
     width: calc(100% + 8px);
     height: 100%;
-    border-left: 3px solid black;
     right: -8;
     animation: cursor 0.6s infinite;
 }
+
 @keyframes cursor {
     to{
         border-left-color: 3px solid #ffa600;
@@ -272,9 +280,13 @@ span{
 }
 
 footer{
+    justify-content: center;
     text-align: center;
-    padding: 2rem 0;
-    background-color: #1e1e1e;
+    padding: 2rem;
+    height: auto;
+    width: 100%;
     font-size: 1.4rem;
     color: #fff;
+    border-top: 0.1rem solid rgba(255, 255, 255, 0.1);
+    z-index: 100;
 }
