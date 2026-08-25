@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -19,62 +19,177 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     />
-    <link rel="icon" href="pets.png" type="image/x-icon">
+    <link rel="icon" href="src/pets.png" type="image/x-icon" />
   </head>
 
   <body>
-    <header>
-      <a href="#" class="logo">Solus Gameolus</a>
-      <!-- <nav>
-        <a href="#" class="active"> Home</a>
-        <a href="#">Skills</a>
-        <a href="#">Education</a>
-      </nav> -->
-    </header>
-    <section class="home">
-      <div class="hero-image">
-        <img src="profile.png" alt="profile picture of Solus Gameolus" />
-      </div>
-      <div class="home-content">
-        <h1>Greetings, I'm <span>Solus Gameolus</span></h1>
-        <h3 class="typing-text">I'm a <span></span></h3>
-        <p>
-          Hey there, it's Solus, your friendly neighborhood hybrid! I'm a
+    <main>
+      <div class="card">
+        <div class="profile-pic-wrap">
+          <img class="profile-pic" src="/src/profile.png" alt="Profile picture of Solus Gameolus" />
+        </div>
+
+        <div class="info">
+          <h1>Greetings, I'm <span class="accent">Solus Gameolus</span></h1>
+          <h2>
+            I'm a <span class="accent" id="typing-role"></span
+            ><span class="cursor">|</span>
+          </h2>
+          <p>
+            Hey there, it's Solus, your friendly neighborhood hybrid! I'm a
           Moroccan lion-dragon furry who leans a bit more towards the
           contemplative side of life, if you catch my drift. When I'm not diving
           deep into the digital marketing world, I'm usually geeking out over
           all things tech. It's a pretty cool mix, right? Always looking for new
           ways to blend creativity with cutting-edge innovation.
-        </p>
-        <div class="social-icons">
-          <a href="#"
-            ><i class="fab fa-discord" title="Username: solusgameolus"></i
-          ></a>
-          <a href="#"><i class="fab fa-twitter" title="Twitter"></i></a>
-          <a
-            href="https://bsky.app/profile/avogatoailurophile.bsky.social"
-            target="_blank"
-            title="BlueSky"
-            ><i class="fab fa-bluesky"></i
-          ></a>
-          <a
-            href="https://github.com/AvogatoWizardWhisker"
-            target="_blank"
-            title="GitHub Page"
-            ><i class="fab fa-github"></i
-          ></a>
-          <a
-            href="https://www.instagram.com/solus.gameolus/"
-            target="_blank"
-            title="Instagram"
-            ><i class="fab fa-instagram"></i
-          ></a>
+          </p>
+
+          <div class="socials">
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Discord"
+            >
+              <i class="fa-brands fa-discord" title="Username: solusgameolus"></i>
+            </a>
+            <a
+              href="https://twitter.com/ForwardEffec9"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Twitter"
+            >
+              <i class="fa-brands fa-twitter" title="Username: ForwardEffec9"></i>
+            </a>
+            <a
+              href="https://bsky.app/profile/avogatoailurophile.bsky.social"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="BlueSky"
+            >
+              <i class="fa-brands fa-bluesky" title="Username: avogatoailurophile"></i>
+            </a>
+            <a
+              href="https://github.com/AvogatoWizardWhisker"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+            >
+              <i class="fa-brands fa-github" title="Username: AvogatoWizardWhisker"></i>
+            </a>
+            <a
+              href="https://instagram.com/solus.gameolus"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
+              <i class="fa-brands fa-instagram" title="Username: solus.gameolus"></i>
+            </a>
+          </div>
         </div>
-        <!-- <a href="#" class="btn">Let's keep in touch</a> -->
       </div>
-    </section>
+    </main>
+
     <footer>
-      <p>&copy; 2026 Solus Gameolus. All rights reserved.</p>
+      <p class="copyright">
+        &copy; <span id="copyright-year"></span> Solus Gameolus. All rights reserved.
+      </p>
+
+      <label class="theme-switch">
+        <i class="fa-solid fa-moon"></i>
+        <span class="switch">
+          <input
+            type="checkbox"
+            id="theme-toggle"
+            aria-label="Toggle light and dark mode"
+          />
+          <span class="slider"></span>
+        </span>
+        <i class="fa-solid fa-sun"></i>
+      </label>
     </footer>
+
+    <script>
+      const roles = [
+        "digital marketer",
+        "photographer",
+        "web developer",
+        "gamer",
+        "curious feline",
+        "cat lover",
+        "tech enthusiast",
+        "problem solver",
+        "dreamer",
+      ];
+
+      const target = document.getElementById("typing-role");
+
+      const TYPE_SPEED = 90; // ms per character while typing
+      const DELETE_SPEED = 45; // ms per character while deleting
+      const HOLD_TIME = 1400; // pause when a word is fully typed
+      const GAP_TIME = 400; // pause when the field is empty
+
+      let roleIndex = 0;
+      let charIndex = 0;
+      let deleting = false;
+
+      function tick() {
+        const currentWord = roles[roleIndex];
+
+        if (!deleting) {
+          charIndex++;
+          target.textContent = currentWord.slice(0, charIndex);
+
+          if (charIndex === currentWord.length) {
+            deleting = true;
+            setTimeout(tick, HOLD_TIME);
+            return;
+          }
+          setTimeout(tick, TYPE_SPEED);
+        } else {
+          charIndex--;
+          target.textContent = currentWord.slice(0, charIndex);
+
+          if (charIndex === 0) {
+            deleting = false;
+            roleIndex = (roleIndex + 1) % roles.length;
+            setTimeout(tick, GAP_TIME);
+            return;
+          }
+          setTimeout(tick, DELETE_SPEED);
+        }
+      }
+
+      tick();
+
+      // Copyright year
+      document.getElementById("copyright-year").textContent =
+        new Date().getFullYear();
+
+      // Light / dark mode toggle
+      const root = document.documentElement;
+      const themeToggle = document.getElementById("theme-toggle");
+      const savedTheme = localStorage.getItem("theme");
+      const prefersLight = window.matchMedia(
+        "(prefers-color-scheme: light)",
+      ).matches;
+
+      function applyTheme(theme) {
+        if (theme === "light") {
+          root.setAttribute("data-theme", "light");
+          themeToggle.checked = true;
+        } else {
+          root.removeAttribute("data-theme");
+          themeToggle.checked = false;
+        }
+      }
+      applyTheme(savedTheme || (prefersLight ? "light" : "dark"));
+
+      themeToggle.addEventListener("change", () => {
+        const theme = themeToggle.checked ? "light" : "dark";
+        applyTheme(theme);
+        localStorage.setItem("theme", theme);
+      });
+    </script>
   </body>
 </html>
